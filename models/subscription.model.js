@@ -49,9 +49,8 @@ const subscriptionSchema = new mongoose.Schema(
 
     renewalDate: {
       type: Date,
-      required: true,
       validate: {
-        validator: function(value) {
+        validator: function (value) {
           return value > this.startDate;
         },
         message: "renewal date should be greater than start date",
@@ -68,7 +67,7 @@ const subscriptionSchema = new mongoose.Schema(
 );
 
 // auto set renewal date
-subscriptionSchema.pre("save", function(next) {
+subscriptionSchema.pre("save", function (next) {
   if (!this.renewalDate) {
     const renewalPeriod = {
       daily: 1,
@@ -79,7 +78,7 @@ subscriptionSchema.pre("save", function(next) {
 
     this.renewalDate = new Date(this.startDate);
     this.renewalDate.setDate(
-      this.startDate.getDate() + renewalPeriod[this.frequency],
+      this.renewalDate.getDate() + renewalPeriod[this.frequency],
     );
   }
 
