@@ -2,9 +2,11 @@ import aj from "../config/arcjet.js";
 
 const arcjetMiddleware = async (req, res, next) => {
   try {
+    console.log("Incoming request header: ", req.headers);
     const decision = await aj.protect(req, { requested: 1 });
 
     if (decision.isDenied()) {
+      console.log("Arject decision:", decision.reason);
       if (decision.reason.isRateLimit())
         return res.status(429).json({ error: "Rate limit exceeded" });
       if (decision.reason.isBot())

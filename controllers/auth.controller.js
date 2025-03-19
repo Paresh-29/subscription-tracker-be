@@ -91,4 +91,9 @@ export const signIn = async (req, res, next) => {
   }
 };
 
-export const signOut = async (req, res) => {};
+export const signOut = async (_req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "User signed out successfully",
+  });
+};

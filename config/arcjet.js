@@ -8,7 +8,11 @@ const aj = arcjet({
     shield({ mode: "LIVE" }),
     detectBot({
       mode: "LIVE",
-      allow: ["CATEGORY:SEARCH_ENGINE"],
+      allow: [
+        "CATEGORY:SEARCH_ENGINE",
+        "UA:PostmanRuntime/7.43.0", // ✅ Allow exact Postman version detected
+        "POSTMAN",
+      ],
     }),
     tokenBucket({
       mode: "LIVE",
